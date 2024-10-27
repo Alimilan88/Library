@@ -39,15 +39,16 @@ def handle_books():
 
         new_book = Books(
             name=name, 
-            genre=genre,
-            author=author,
-            editorial=editorial,
-            releasedate=releasedate
+            genre_id=genre.id,
+            author_id=author.id,
+            editorial_id=editorial.id,
+            releasedate=releasedate,
         )
         
         db.session.add(new_book)
         db.session.commit()
         response_body['message'] = "Book created"
+        response_body['book'] = new_book.serialize()
         return response_body, 201 
     
 
@@ -89,7 +90,7 @@ def handle_books_id(id):
             return response_body, 404
         
         row.name = name
-        row.genre_id = genreid
+        row.genre_id = genre.id
         row.author_id = author.id
         row.editorial_id = editorial.id
         row.releasedate = releasedate

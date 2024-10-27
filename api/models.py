@@ -22,9 +22,9 @@ class Books(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "genre": self.genre,
-            "author": self.author,
-            "editorial": self.editorial,
+            "genre": self.genre.name if self.genre else None,
+            "author": self.author.name if self.author else None,
+            "editorial": self.editorial.name if self.editorial else None,
             "releasedate": self.releasedate,
         }
     
